@@ -1,0 +1,6 @@
+FROM osrf/ros:noetic-desktop-full
+
+# handling data for ORB_SLAM3
+RUN sudo apt-get update && apt-get install -y ffmpeg python3-pip
+RUN sudo apt install -y python3-roslib python3-sensor-msgs python3-opencv
+RUN pip3 install tqdm

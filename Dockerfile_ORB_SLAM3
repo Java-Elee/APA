@@ -1,0 +1,23 @@
+FROM osrf/ros:melodic-desktop-full
+
+# gcc and g++ on this ros image are version 7, upgrade them to version 11
+# as required by ORB-SLAM3
+RUN sudo apt-get update && apt-get -y install software-properties-common && \
+    add-apt-repository -y ppa:ubuntu-toolchain-r/test && apt-get update && \
+    apt-get -y install g++-11 gcc-11 && \
+    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100 && \
+    update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100
+
+# install dependencies
+RUN sudo apt -y install libglew-dev \
+    libxkbcommon-dev wayland-protocols python-pip && \
+    sudo python -mpip install pybind11
+
+# # install python3 related packages
+# # to convert data required by ORB_SLAM3 from rosbag
+# RUN sudo apt-get update && apt-get -y install 
+# RUN sudo apt install -y python3-roslib python3-sensor-msgs python3-opencv
+# RUN pip3 install tqdm
+
+
+
